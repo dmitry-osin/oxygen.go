@@ -13,3 +13,7 @@ func About(ctx *fiber.Ctx) error {
 func Contact(ctx *fiber.Ctx) error {
 	return ctx.Render("contact", fiber.Map{})
 }
+
+func Blog(ctx *fiber.Ctx) error {
+	return ctx.Render("blog", fiber.Map{})
+}

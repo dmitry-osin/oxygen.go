@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/pug/v2"
 	"oxygen.go/route"
@@ -18,6 +20,7 @@ func main() {
 	app.Get("/", route.Index)
 	app.Get("/about", route.About)
 	app.Get("/contact", route.Contact)
+	app.Get("/blog", route.Blog)
 
 	app.Get("/admin", area.Admin)
 	app.Get("/admin/posts", area.Posts)
@@ -25,6 +28,8 @@ func main() {
 
 	err := app.Listen(":3000")
 	if err != nil {
+		log.Fatal(err)
 		return
 	}
+
 }
