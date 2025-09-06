@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{post.title}} - Oxygen Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+
+{{> partial/_navbar }}
+
+<!-- Main Content -->
+<main class="container my-5 pt-5">
+    <div class="row">
+        <!-- Post Content -->
+        <div class="col-lg-8 col-md-12">
+            <article class="post-detail">
+                <!-- Post Header -->
+                <header class="post-header mb-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-primary fs-6 px-3 py-2">{{post.category}}</span>
+                        <div class="d-flex align-items-center text-muted">
+                            <i class="bi bi-calendar3 me-2"></i>
+                            <span>{{post.publishedAt}}</span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="display-5 fw-bold text-primary mb-3">{{post.title}}</h1>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="{{post.author.avatar}}" class="rounded-circle me-3" width="50" height="50" alt="{{post.author.name}}">
+                        <div>
+                            <h6 class="mb-0">{{post.author.name}} {{post.author.lastName}}</h6>
+                            <small class="text-muted">@{{post.author.username}}</small>
+                        </div>
+                        <div class="ms-auto d-flex gap-2">
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-heart me-1"></i> Like
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-share me-1"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Post Image -->
+                <div class="post-image mb-4">
+                    <img src="{{post.featuredImage}}" class="img-fluid rounded-3 shadow-sm" alt="{{post.title}}">
+                </div>
+
+                <!-- Post Content -->
+                <div class="post-content">
+                    <div class="post-body">
+                        {{post.content}}
+                    </div>
+                </div>
+
+                <!-- Post Tags -->
+                <div class="post-tags mt-4 mb-4">
+                    <h6 class="text-muted mb-2">Tags:</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        {{#each post.tags}}
+                        <span class="badge bg-light text-dark border">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <!-- Post Actions -->
+                <div class="post-actions border-top pt-4 mb-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-heart me-1"></i> Like ({{post.likes}})
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="bi bi-chat me-1"></i> Comment ({{post.comments}})
+                                </button>
+                                <button class="btn btn-outline-info">
+                                    <i class="bi bi-bookmark me-1"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <div class="d-flex gap-2 justify-content-md-end">
+                                <button class="btn btn-outline-dark btn-sm">
+                                    <i class="bi bi-twitter"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-facebook"></i>
+                                </button>
+                                <button class="btn btn-outline-info btn-sm">
+                                    <i class="bi bi-linkedin"></i>
+                                </button>
+                                <button class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-telegram"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h5 class="mb-4">Comments ({{post.comments}})</h5>
+                    
+                    <!-- Comment Form -->
+                    <div class="comment-form mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" rows="3" placeholder="Write a comment..."></textarea>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="comments-list">
+                        <!-- Comment 1 -->
+                        <div class="comment mb-4">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/40x40" class="rounded-circle me-3" alt="User">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="mb-0">Sarah Wilson</h6>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                    <p class="mb-2">Great article! This really helped me understand the concepts better. Thanks for sharing!</p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-link btn-sm p-0 text-muted">
+                                            <i class="bi bi-heart me-1"></i> Like
+                                        </button>
+                                        <button class="btn btn-link btn-sm p-0 text-muted">
+                                            <i class="bi bi-reply me-1"></i> Reply
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment 2 -->
+                        <div class="comment mb-4">
+                            <div class="d-flex">
+                                <img src="https://via.placeholder.com/40x40" class="rounded-circle me-3" alt="User">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="mb-0">Mike Johnson</h6>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </div>
+                                    <p class="mb-2">Excellent explanation! Could you write a follow-up about advanced patterns?</p>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-link btn-sm p-0 text-muted">
+                                            <i class="bi bi-heart me-1"></i> Like
+                                        </button>
+                                        <button class="btn btn-link btn-sm p-0 text-muted">
+                                            <i class="bi bi-reply me-1"></i> Reply
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 col-md-12">
+            {{> partial/_sidebar }}
+        </div>
+    </div>
+</main>
+
+{{> partial/_footer }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

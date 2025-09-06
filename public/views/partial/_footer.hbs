@@ -1,0 +1,14 @@
+<footer class="footer bg-primary text-white mt-5">
+    <div class="container">
+        <div class="d-flex justify-content-center pt-3">
+            <!-- Brand and Description -->
+            <h5 class="text-white">
+                &copy; <span id="currentYear"></span> Oxygen Blog. All rights reserved.
+            </h5>
+        </div>
+</footer>
+
+<!-- JavaScript for dynamic year -->
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
