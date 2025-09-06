@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oxygen Blog - Modern Blog Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+
+{{> partial/_navbar }}
+
+<!-- Main Content -->
+<main class="container my-5 pb-5">
+    <div class="row">
+        <!-- Posts Column -->
+        <div class="col-lg-8">
+            <!-- Page Header -->
+            <div class="blog-header mb-5">
+                <h1 class="display-4 fw-bold text-primary mb-3">
+                    <i class="bi bi-journal-text me-3"></i>Latest Posts
+                </h1>
+                <p class="lead text-muted">Discover insights, tutorials, and best practices in software development</p>
+            </div>
+
+            <!-- Posts Grid -->
+            <div class="posts-grid">
+                <!-- Post 1 -->
+                <article class="post-card">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="post-image">
+                            <img src="https://placehold.co/400x250/007bff/ffffff?text=GO" class="card-img-top" alt="Building Microservices with Go">
+                            <div class="post-category">
+                                <span class="badge bg-primary">Backend</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="post-meta mb-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar me-1"></i>Dec 15, 2024
+                                    <i class="bi bi-person me-1 ms-3"></i>Dmitry Osin
+                                </small>
+                            </div>
+                            <h2 class="card-title h4">
+                                <a href="/post/building-microservices-with-go" class="text-decoration-none">Building Microservices with Go</a>
+                            </h2>
+                            <p class="card-text text-muted">Learn how to create scalable microservices using Go, Docker, and modern deployment practices. This comprehensive guide covers everything from basic concepts to advanced patterns.</p>
+                            <div class="post-tags mb-3">
+                                <a href="/tag/go" class="badge bg-light text-dark me-1">Go</a>
+                                <a href="/tag/microservices" class="badge bg-light text-dark me-1">Microservices</a>
+                                <a href="/tag/docker" class="badge bg-light text-dark me-1">Docker</a>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="/post/building-microservices-with-go" class="btn btn-outline-primary">
+                                    Read More <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Sidebar Column -->
+        <div class="col-lg-4">
+            {{> partial/_sidebar }}
+        </div>
+    </div>
+</main>
+
+{{> partial/_footer }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+    });
+</script>
+</body>
+</html>

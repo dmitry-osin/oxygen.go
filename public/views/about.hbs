@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Me - Oxygen Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+
+{{> partial/_navbar }}
+
+<!-- About Page Content -->
+<main class="container my-5 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Profile Header -->
+            <div class="about-header text-center mb-5">
+                <div class="profile-image-container mb-4">
+                    <img src="https://placehold.co/200x200/007bff/ffffff?text=DO" 
+                         alt="Profile Picture" class="profile-image">
+                </div>
+                <h1 class="display-4 fw-bold text-primary mb-3">Dmitry Osin</h1>
+                <p class="lead text-muted mb-4">Senior Software Engineer & Tech Blogger</p>
+                
+                <!-- Social Links -->
+                <div class="social-links mb-4">
+                    <a href="https://github.com" class="btn btn-outline-primary me-2" target="_blank">
+                        <i class="bi bi-github me-1"></i>GitHub
+                    </a>
+                    <a href="https://linkedin.com" class="btn btn-outline-info me-2" target="_blank">
+                        <i class="bi bi-linkedin me-1"></i>LinkedIn
+                    </a>
+                    <a href="https://twitter.com" class="btn btn-outline-primary me-2" target="_blank">
+                        <i class="bi bi-twitter me-1"></i>Twitter
+                    </a>
+                    <a href="mailto:contact@example.com" class="btn btn-outline-success">
+                        <i class="bi bi-envelope me-1"></i>Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- About Content -->
+            <div class="about-content">
+                <!-- Bio Section -->
+                <section class="mb-5">
+                    <h2 class="h3 text-primary mb-4">
+                        <i class="bi bi-person-circle me-2"></i>About Me
+                    </h2>
+                    <div class="bio-text">
+                        <p class="lead">Hello! I'm Dmitry, a passionate software engineer with over 13 years of experience in building robust and scalable applications.</p>
+                        
+                        <p>I specialize in backend development using Java, Kotlin, Spring Framework, and Go. My journey in programming started with Java, and over the years I've expanded my expertise to include modern languages like Kotlin and Go, as well as message queuing systems like Kafka and ArtemisMQ.</p>
+                        
+                        <p>I have extensive experience working with Linux systems and enjoy exploring new technologies, writing technical articles, and sharing knowledge with the community. This blog is my way of sharing experiences and helping fellow developers in their journey.</p>
+                    </div>
+                </section>
+
+                <!-- Skills Section -->
+                <section class="mb-5">
+                    <h2 class="h3 text-primary mb-4">
+                        <i class="bi bi-code-slash me-2"></i>Skills & Technologies
+                    </h2>
+                    <div class="skills-grid">
+                        <div class="skill-category mb-4">
+                            <h4 class="h5 text-secondary mb-3">Programming Languages</h4>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary fs-6">Java</span>
+                                <span class="badge bg-primary fs-6">Kotlin</span>
+                                <span class="badge bg-primary fs-6">Go</span>
+                                <span class="badge bg-primary fs-6">Clojure</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category mb-4">
+                            <h4 class="h5 text-secondary mb-3">Frameworks & Libraries</h4>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-info fs-6">Spring Framework</span>
+                                <span class="badge bg-info fs-6">Spring Boot</span>
+                                <span class="badge bg-info fs-6">Spring Security</span>
+                                <span class="badge bg-info fs-6">Fiber</span>
+                                <span class="badge bg-info fs-6">Gin</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category mb-4">
+                            <h4 class="h5 text-secondary mb-3">Message Queues & Systems</h4>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-warning text-dark fs-6">Apache Kafka</span>
+                                <span class="badge bg-warning text-dark fs-6">ArtemisMQ</span>
+                                <span class="badge bg-warning text-dark fs-6">RabbitMQ</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category mb-4">
+                            <h4 class="h5 text-secondary mb-3">Infrastructure & Tools</h4>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-success fs-6">Linux</span>
+                                <span class="badge bg-success fs-6">Docker</span>
+                                <span class="badge bg-success fs-6">Kubernetes</span>
+                                <span class="badge bg-success fs-6">Git</span>
+                                <span class="badge bg-success fs-6">Jenkins</span>
+                                <span class="badge bg-success fs-6">REST API</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience Section -->
+                <section class="mb-5">
+                    <h2 class="h3 text-primary mb-4">
+                        <i class="bi bi-briefcase me-2"></i>Work Experience
+                    </h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4 class="h5 mb-1">Senior Software Engineer</h4>
+                                <p class="text-muted mb-2">Current Company • 2020 - Present</p>
+                                <p>Leading development of high-performance backend systems using Java, Spring Framework, and Go. Architecting microservices solutions with Kafka and ArtemisMQ for message processing.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4 class="h5 mb-1">Software Engineer</h4>
+                                <p class="text-muted mb-2">Tech Startup • 2018 - 2020</p>
+                                <p>Developed scalable backend services using Java and Spring Boot. Implemented message queuing solutions with Apache Kafka and worked extensively with Linux systems.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4 class="h5 mb-1">Backend Developer</h4>
+                                <p class="text-muted mb-2">Software Company • 2015 - 2018</p>
+                                <p>Built enterprise applications using Java and Spring Framework. Gained experience with Clojure for functional programming and message queue systems.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4 class="h5 mb-1">Junior Java Developer</h4>
+                                <p class="text-muted mb-2">IT Company • 2011 - 2015</p>
+                                <p>Started my professional journey with Java development. Learned Spring Framework fundamentals and gained experience with Linux administration and database management.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section class="mb-5">
+                    <h2 class="h3 text-primary mb-4">
+                        <i class="bi bi-envelope me-2"></i>Get In Touch
+                    </h2>
+                    <div class="contact-info">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="contact-item d-flex align-items-center">
+                                    <i class="bi bi-envelope-fill text-primary me-3 fs-5"></i>
+                                    <div>
+                                        <strong>Email</strong><br>
+                                        <a href="mailto:dmitry.osin@example.com" class="text-decoration-none">dmitry.osin@example.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="contact-item d-flex align-items-center">
+                                    <i class="bi bi-telephone-fill text-primary me-3 fs-5"></i>
+                                    <div>
+                                        <strong>Phone</strong><br>
+                                        <a href="tel:+1234567890" class="text-decoration-none">+1 (234) 567-890</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="contact-item d-flex align-items-center">
+                                    <i class="bi bi-geo-alt-fill text-primary me-3 fs-5"></i>
+                                    <div>
+                                        <strong>Location</strong><br>
+                                        <span class="text-muted">Remote / Global</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="contact-item d-flex align-items-center">
+                                    <i class="bi bi-calendar-event text-primary me-3 fs-5"></i>
+                                    <div>
+                                        <strong>Availability</strong><br>
+                                        <span class="text-muted">Open for opportunities</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> partial/_footer }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+    });
+</script>
+</body>
+</html>
