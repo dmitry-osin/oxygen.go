@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building Microservices with Go - Oxygen Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+
+{{> partial/_navbar }}
+
+<!-- Post Detail Page Content -->
+<main class="container my-5 pb-5">
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/tag/backend" class="text-decoration-none">Backend</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Building Microservices with Go</li>
+                </ol>
+            </nav>
+
+            <!-- Post Header -->
+            <article class="post-detail">
+                <header class="post-header mb-4">
+                    <div class="post-meta mb-3">
+                        <div class="d-flex align-items-center flex-wrap">
+                            <span class="badge bg-primary me-3 mb-2">Backend</span>
+                            <small class="text-muted me-3">
+                                <i class="bi bi-calendar me-1"></i>December 15, 2024
+                            </small>
+                            <small class="text-muted me-3">
+                                <i class="bi bi-clock me-1"></i>8 min read
+                            </small>
+                            <small class="text-muted">
+                                <i class="bi bi-eye me-1"></i>1,234 views
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <h1 class="display-4 fw-bold text-primary mb-3">Building Microservices with Go</h1>
+                    
+                    <div class="post-tags mb-4">
+                        <a href="/tag/go" class="badge bg-light text-dark me-2">Go</a>
+                        <a href="/tag/microservices" class="badge bg-light text-dark me-2">Microservices</a>
+                        <a href="/tag/docker" class="badge bg-light text-dark me-2">Docker</a>
+                        <a href="/tag/architecture" class="badge bg-light text-dark me-2">Architecture</a>
+                    </div>
+                </header>
+
+                <!-- Post Image -->
+                <div class="post-image mb-4">
+                    <img src="https://placehold.co/800x400/007bff/ffffff?text=GO+MICROSERVICES" 
+                         alt="Building Microservices with Go" class="img-fluid rounded">
+                </div>
+
+                <!-- Post Content -->
+                <div class="post-content">
+                    <div class="post-body">
+                        <p class="lead">Learn how to create scalable microservices using Go, Docker, and modern deployment practices. This comprehensive guide covers everything from basic concepts to advanced patterns.</p>
+
+                        <h2>Introduction to Microservices</h2>
+                        <p>Microservices architecture has become the de facto standard for building large-scale applications. Unlike monolithic applications, microservices break down your application into smaller, independent services that can be developed, deployed, and scaled independently.</p>
+
+                        <p>In this article, we'll explore how to build microservices using Go, one of the most popular languages for backend development. Go's simplicity, performance, and excellent concurrency support make it an ideal choice for microservices.</p>
+
+                        <h2>Why Choose Go for Microservices?</h2>
+                        <p>Go offers several advantages for microservices development:</p>
+                        
+                        <ul>
+                            <li><strong>Performance:</strong> Go compiles to native machine code, providing excellent performance</li>
+                            <li><strong>Concurrency:</strong> Built-in goroutines make handling concurrent requests easy</li>
+                            <li><strong>Simplicity:</strong> Clean syntax and minimal learning curve</li>
+                            <li><strong>Cross-platform:</strong> Single binary deployment across different platforms</li>
+                            <li><strong>Fast compilation:</strong> Quick build times for rapid development</li>
+                        </ul>
+
+                        <h2>Setting Up Your Go Microservice</h2>
+                        <p>Let's start by creating a basic microservice structure. First, initialize your Go module:</p>
+
+                        <pre><code>go mod init microservice-example
+go get github.com/gin-gonic/gin
+go get github.com/go-redis/redis/v8</code></pre>
+
+                        <p>Create a simple HTTP server using Gin framework:</p>
+
+                        <pre><code>package main
+
+import (
+    "net/http"
+    "github.com/gin-gonic/gin"
+)
+
+func main() {
+    r := gin.Default()
+    
+    r.GET("/health", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{
+            "status": "healthy",
+            "service": "user-service",
+        })
+    })
+    
+    r.Run(":8080")
+}</code></pre>
+
+                        <h2>Docker Configuration</h2>
+                        <p>Containerizing your microservice is essential for deployment. Here's a Dockerfile for your Go service:</p>
+
+                        <pre><code>FROM golang:1.21-alpine AS builder
+
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN go build -o main .
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+
+COPY --from=builder /app/main .
+
+EXPOSE 8080
+CMD ["./main"]</code></pre>
+
+                        <h2>Service Discovery and Communication</h2>
+                        <p>Microservices need to communicate with each other. Common patterns include:</p>
+
+                        <ul>
+                            <li><strong>HTTP/REST:</strong> Synchronous communication over HTTP</li>
+                            <li><strong>gRPC:</strong> High-performance RPC framework</li>
+                            <li><strong>Message Queues:</strong> Asynchronous communication using Kafka or RabbitMQ</li>
+                        </ul>
+
+                        <h2>Monitoring and Observability</h2>
+                        <p>Implementing proper monitoring is crucial for microservices. Consider using:</p>
+
+                        <ul>
+                            <li>Prometheus for metrics collection</li>
+                            <li>Grafana for visualization</li>
+                            <li>Jaeger for distributed tracing</li>
+                            <li>ELK stack for logging</li>
+                        </ul>
+
+                        <h2>Conclusion</h2>
+                        <p>Building microservices with Go provides a solid foundation for scalable applications. The combination of Go's performance characteristics and microservices architecture patterns creates robust, maintainable systems.</p>
+
+                        <p>Remember to start simple and gradually add complexity as your system grows. Focus on proper monitoring, testing, and documentation from the beginning.</p>
+                    </div>
+                </div>
+
+                <!-- Post Actions -->
+                <div class="post-actions mt-5 pt-4 border-top">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="social-share ms-3">
+                            <span class="me-3 fw-semibold">Share:</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="bi bi-twitter"></i> Twitter
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="bi bi-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-facebook"></i> Facebook
+                            </a>
+                        </div>
+                        <div class="post-navigation me-3">
+                            <a href="#" class="btn btn-outline-secondary btn-sm me-2">
+                                <i class="bi bi-chevron-left"></i> Previous
+                            </a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm">
+                                Next <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Comments Section -->
+            <section class="comments-section mt-5">
+                <h3 class="h4 mb-4">
+                    <i class="bi bi-chat-dots me-2"></i>Comments (3)
+                </h3>
+                
+                <div class="comment-form mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Leave a Comment</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="commentName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="commentName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="commentEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="commentEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="commentText" class="form-label">Comment</label>
+                                    <textarea class="form-control" id="commentText" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comments-list">
+                    <div class="comment">
+                        <div class="d-flex">
+                            <img src="https://placehold.co/50x50/28a745/ffffff?text=JD" alt="John Doe" class="rounded-circle me-3" width="50" height="50">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">John Doe</h6>
+                                <small class="text-muted">2 hours ago</small>
+                                <p class="mt-2 mb-0">Great article! The examples are very clear and easy to follow. I've been looking for a comprehensive guide on Go microservices.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <div class="d-flex">
+                            <img src="https://placehold.co/50x50/dc3545/ffffff?text=AS" alt="Alice Smith" class="rounded-circle me-3" width="50" height="50">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Alice Smith</h6>
+                                <small class="text-muted">5 hours ago</small>
+                                <p class="mt-2 mb-0">Thanks for sharing! Could you provide more details about service discovery patterns?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <div class="d-flex">
+                            <img src="https://placehold.co/50x50/6f42c1/ffffff?text=MB" alt="Mike Brown" class="rounded-circle me-3" width="50" height="50">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Mike Brown</h6>
+                                <small class="text-muted">1 day ago</small>
+                                <p class="mt-2 mb-0">Excellent work! The Docker configuration section was particularly helpful. Looking forward to more articles like this.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Author Profile Sidebar -->
+        <div class="col-lg-4">
+            <div class="author-profile-widget">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="card-title mb-0">
+                            <i class="bi bi-person-circle me-2"></i>About the Author
+                        </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Author Photo -->
+                        <div class="author-photo mb-3">
+                            <img src="https://placehold.co/120x120/007bff/ffffff?text=DO" 
+                                 alt="Dmitry Osin" class="rounded-circle border border-3 border-primary">
+                        </div>
+                        
+                        <!-- Author Info -->
+                        <h5 class="author-name mb-1">Dmitry Osin</h5>
+                        <p class="author-title text-muted mb-3">Senior Software Engineer</p>
+                        
+                        <!-- Bio -->
+                        <p class="author-bio text-muted mb-4">
+                            Passionate software engineer with 13+ years of experience in backend development. 
+                            Specializing in Java, Go, Spring Framework, and microservices architecture.
+                        </p>
+                        
+                        <!-- Key Technologies -->
+                        <div class="author-technologies mb-4">
+                            <h6 class="fw-semibold mb-3">Key Technologies</h6>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <span class="badge bg-primary">Java</span>
+                                <span class="badge bg-primary">Go</span>
+                                <span class="badge bg-info">Spring</span>
+                                <span class="badge bg-warning text-dark">Kotlin</span>
+                                <span class="badge bg-success">Docker</span>
+                                <span class="badge bg-danger">Kafka</span>
+                                <span class="badge bg-secondary">Linux</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="author-social mb-4">
+                            <a href="https://github.com" class="btn btn-outline-dark btn-sm me-2" target="_blank">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://linkedin.com" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://twitter.com" class="btn btn-outline-info btn-sm" target="_blank">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Contact Button -->
+                        <a href="/contact" class="btn btn-primary w-100 mb-4">
+                            <i class="bi bi-envelope me-2"></i>Contact Author
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Posts by Author -->
+                <div class="recent-posts-widget mt-4">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="card-title mb-0">
+                                <i class="bi bi-clock-history me-2"></i>Recent Posts
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="recent-posts-list">
+                                <div class="recent-post-item">
+                                    <div class="post-thumbnail">
+                                        <img src="https://placehold.co/60x60/28a745/ffffff?text=JAVA" alt="Post thumbnail" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a href="/post/spring-security-best-practices" class="text-decoration-none">Spring Security Best Practices</a>
+                                        </h6>
+                                        <small class="post-date text-muted">
+                                            <i class="bi bi-calendar me-1"></i>Dec 12, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-post-item">
+                                    <div class="post-thumbnail">
+                                        <img src="https://placehold.co/60x60/ffc107/000000?text=KAFKA" alt="Post thumbnail" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a href="/post/kafka-streaming-patterns" class="text-decoration-none">Kafka Streaming Patterns</a>
+                                        </h6>
+                                        <small class="post-date text-muted">
+                                            <i class="bi bi-calendar me-1"></i>Dec 10, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-post-item">
+                                    <div class="post-thumbnail">
+                                        <img src="https://placehold.co/60x60/dc3545/ffffff?text=DOCKER" alt="Post thumbnail" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a href="/post/docker-optimization-tips" class="text-decoration-none">Docker Optimization Tips</a>
+                                        </h6>
+                                        <small class="post-date text-muted">
+                                            <i class="bi bi-calendar me-1"></i>Dec 8, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-post-item">
+                                    <div class="post-thumbnail">
+                                        <img src="https://placehold.co/60x60/6f42c1/ffffff?text=KOTLIN" alt="Post thumbnail" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a href="/post/kotlin-coroutines-deep-dive" class="text-decoration-none">Kotlin Coroutines Deep Dive</a>
+                                        </h6>
+                                        <small class="post-date text-muted">
+                                            <i class="bi bi-calendar me-1"></i>Dec 5, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-post-item">
+                                    <div class="post-thumbnail">
+                                        <img src="https://placehold.co/60x60/20c997/ffffff?text=LINUX" alt="Post thumbnail" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a href="/post/linux-system-administration" class="text-decoration-none">Linux System Administration</a>
+                                        </h6>
+                                        <small class="post-date text-muted">
+                                            <i class="bi bi-calendar me-1"></i>Dec 3, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> partial/_footer }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+    });
+</script>
+</body>
+</html>
